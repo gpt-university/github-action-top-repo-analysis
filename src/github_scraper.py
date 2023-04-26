@@ -384,9 +384,10 @@ if __name__ == "__main__":
         if not DATA_PATH.exists():
             os.mkdir(DATA_PATH)
     # gets github API token
-    with open("src/credentials.json") as f:
-        credentials = json.load(f)
-        api_token = credentials["github_token"]
+    api_token = os.getenv('api_token').strip()   
+#     with open("src/credentials.json") as f:
+#         credentials = json.load(f)
+#         api_token = credentials["github_token"]
 
     # performs data scraping
     main(
