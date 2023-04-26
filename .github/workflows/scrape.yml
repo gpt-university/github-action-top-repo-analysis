@@ -24,11 +24,6 @@ on:
         description: 'out dir '
         type: enviroment
         required: False      
-      GITHUB_TOKEN:      
-        description: 'githubtoken '
-        type: enviroment
-        required: False      
-        default: ${{ secrets.GITHUB_TOKEN }}
   push:  
   schedule:
   - cron: '0 23 * * *' # @daily
@@ -52,7 +47,8 @@ jobs:
       run: python src/github_scraper.py --queries=${keywords} --path=${outdir}
       env:
         hashtags: ${{ github.event.inputs.hashtags }}          
-        outdir: ${{ github.event.inputs.outdir }}            
+        outdir: ${{ github.event.inputs.outdir }}      
+        GITHUB_TOKEN: ${{ github.token }}        
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
