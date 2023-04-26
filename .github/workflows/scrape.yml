@@ -24,7 +24,11 @@ on:
         description: 'out dir '
         type: enviroment
         required: False      
-        
+      GITHUB_TOKEN:      
+        description: 'githubtoken '
+        type: enviroment
+        required: False      
+        default: ${{ secrets.GITHUB_TOKEN }}
   push:  
   schedule:
   - cron: '0 23 * * *' # @daily
