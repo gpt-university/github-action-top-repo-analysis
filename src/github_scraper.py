@@ -80,7 +80,7 @@ def get_top_repos(g, query, sort, order, num):
 
     # extracts repo information for each repo
     for repo in tqdm(repos, desc=f"{query} Repo Scrape", total=num):
-        print("repo search results counts",len(repos))
+        print("repo search results counts",len(tqdm(repos, desc=f"{query} Repo Scrape", total=num)))
         check_rate_limit(g)
         print("should we wait??")
         
