@@ -384,7 +384,7 @@ if __name__ == "__main__":
         if not DATA_PATH.exists():
             os.mkdir(DATA_PATH)
     # gets github API token
-    api_token = os.getenv('api_token').strip()   
+    api_token = os.getenv('GITHUB_TOKEN').strip()   
 #     with open("src/credentials.json") as f:
 #         credentials = json.load(f)
 #         api_token = credentials["github_token"]
