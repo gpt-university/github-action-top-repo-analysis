@@ -39,6 +39,7 @@ from tqdm import tqdm
 from docopt import docopt
 from github import Github, GithubException
 import os
+import pathlib
 
 def get_top_repos(g, query, sort, order, num):
     """Gets the top n repos for a search query on Github.
