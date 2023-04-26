@@ -38,7 +38,7 @@ import pandas as pd
 from tqdm import tqdm
 from docopt import docopt
 from github import Github, GithubException
-
+import os
 
 def get_top_repos(g, query, sort, order, num):
     """Gets the top n repos for a search query on Github.
@@ -367,13 +367,21 @@ def main(token, queries, sort, order, num, path):
 
 if __name__ == "__main__":
 
+    
     print("--Data scraping starting")
     # processes command line arguments as required
     opt = docopt(__doc__)
     opt["--num"] = int(opt["--num"])
     if "," in opt["--queries"]:
         opt["--queries"] = opt["--queries"].split(",")
+    if len(opt["--queries"] )==0:
+        opt["--queries"] =["midjourney","chatgpt"]
+    for keyword in opt["--queries"]:
+        DATA_PATH = pathlib.Path((keyword+'-data').replace('/','')+"/")
+        DATA_PATH.mkdir(parents=True, exist_ok=True)
 
+        if not DATA_PATH.exists():
+            os.mkdir(DATA_PATH)
     # gets github API token
     with open("src/credentials.json") as f:
         credentials = json.load(f)
@@ -386,7 +394,8 @@ if __name__ == "__main__":
         opt["--sort"],
         opt["--order"],
         opt["--num"],
-        opt["--path"],
+#         opt["--path"],
+        DATA_PATH,
     )
 
     print("--Data scraping complete")
